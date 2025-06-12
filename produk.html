@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veltra Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'SF Pro Display', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #f0f0f0;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    body.dark {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: linear-gradient(to right, #4b6cb7, #182848);
+      color: white;
+      position: relative;
+      flex-direction: column;
+    }
+
+    header .top-bar {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    header img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    header .subtext {
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .welcome-popup {
+      background: #ffffff;
+      color: #333;
+      padding: 10px 20px;
+      text-align: center;
+      font-weight: bold;
+      animation: fadeOut 3s forwards;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; display: none; }
+    }
+
+    .popup-info {
+      background-color: #fefefe;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #444;
+      animation: slideIn 0.5s ease-out;
+      margin: 1rem;
+      border-radius: 8px;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .search-bar {
+      margin: 1rem;
+      text-align: center;
+    }
+
+    .search-bar input {
+      padding: 6px 12px;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .product {
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    body.dark .product {
+      background-color: #1e1e1e;
+      color: white;
+    }
+
+    .product:hover {
+      transform: scale(1.02);
+    }
+
+    .product img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+      object-fit: contain;
+    }
+
+    .product .price {
+      color: green;
+      font-weight: bold;
+    }
+
+    .order-button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .order-button:hover {
+      background-color: #388e3c;
+    }
+
+    .menu-button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    .menu-content {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 10px;
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      z-index: 10;
+    }
+
+    .menu-content a {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    .menu-content a img {
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+    }
+
+    .menu-content a:hover {
+      background-color: #eee;
+    }
+
+    .show-menu {
+      display: block;
+    }
+
+    .payment-section {
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .payment-section h2 {
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .payment-methods {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .payment-methods div {
+      text-align: center;
+    }
+
+    .payment-methods img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 6px;
+    }
+
+    .payment-note {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="welcome-popup">Selamat datang kak di Veltra Store!</div>
+  <header>
+    <div class="top-bar">
+      <div style="display: flex; align-items: center;">
+        <img src="https://i.postimg.cc/jDLNTZZz/animeguy.jpg" alt="anime logo">
+        <h1>Veltra Store</h1>
+      </div>
+      <button class="menu-button" onclick="toggleMenu()">⋮</button>
+    </div>
+    <div class="subtext">Premium Apps Termurah & Terpercaya 🔥</div>
+    <div class="menu-content" id="menu">
+      <a href="https://wa.me/6285166497792" target="_blank"><img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png"/>Contact Person</a>
+      <a href="https://www.instagram.com/veltrastore_jasasuntiksosmed/profilecard/?igsh=MTk3d2MwajBwNW5t" target="_blank"><img src="https://img.icons8.com/fluency/48/instagram-new.png"/>Testimoni</a>
+      <a href="#" onclick="toggleDarkMode()">🌓 Dark Mode</a>
+    </div>
+  </header>
+
+  <div class="popup-info">Kenapa harus Veltra Store? Harga murah, layanan cepat, dan 100% terpercaya. Terbukti dari banyaknya testimoni!</div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Cari aplikasi..." onkeyup="filterProducts(this.value)" />
+  </div>
+
+  <div class="product-grid" id="productGrid"></div>
+
+  <section class="payment-section">
+    <h2>Metode Pembayaran</h2>
+    <div class="payment-methods">
+      <div>
+        <img src="https://i.postimg.cc/4nfLdpK2/gopay.png" alt="Gopay">
+        <div>Gopay</div>
+      </div>
+      <div>
+        <img src="https://i.postimg.cc/WqqsrCWT/dana.png" alt="Dana">
+        <div>Dana</div>
+      </div>
+      <div>
+        <img src="https://i.postimg.cc/ZWBDmZ9T/seabank.png" alt="SeaBank">
+        <div>SeaBank</div>
+      </div>
+      <div>
+        <img src="https://i.postimg.cc/qtFYnR96/qris.png" alt="QRIS">
+        <div>QRIS</div>
+      </div>
+    </div>
+    <p class="payment-note">Pembayaran dilakukan via WhatsApp setelah order ya, kak 😊</p>
+  </section>
+
+  <script>
+    const products = [
+      { name: "NETFLIX 1P1U - 1 BULAN", price: "Rp38.000", img: "https://i.postimg.cc/H8JQWztc/netflix.png" },
+      { name: "CANVA PRO - 1 TAHUN (INVITE)", price: "Rp15.000", img: "https://i.postimg.cc/yJt64TWr/canva.png" },
+      { name: "CAPCUT - 1 BULAN (PRIVATE)", price: "Rp18.000", img: "https://i.postimg.cc/WFN8V0Kg/capcut.png" },
+      { name: "CHATGPT PLUS 4.0 - 1 BULAN (PRIVATE)", price: "Rp25.000", img: "https://i.postimg.cc/2VFsFxYN/chatgpt.png" },
+      { name: "CAPCUT - 1 BULAN (SHARING)", price: "Rp15.000", img: "https://i.postimg.cc/WFN8V0Kg/capcut.png" },
+      { name: "CHATGPT PLUS 4.0 - 1 BULAN (SHARING)", price: "Rp20.000", img: "https://i.postimg.cc/2VFsFxYN/chatgpt.png" },
+      { name: "SPOTIFY PREMIUM - 1 BULAN (PRIVATE)", price: "Rp25.000", img: "https://i.postimg.cc/Y4kfN1tZ/spotify.png" },
+      { name: "RCTI+ SPORTS", price: "Rp30.000", img: "https://i.postimg.cc/cK6PWynd/rcti.png" },
+      { name: "VIU PREMIUM - 1 TAHUN (PRIVATE)", price: "Rp12.000", img: "https://i.postimg.cc/V0LzXZhv/viu.png" },
+      { name: "SPOTIFY PREMIUM - 2 BULAN (PRIVATE)", price: "Rp40.000", img: "https://i.postimg.cc/Y4kfN1tZ/spotify.png" },
+      { name: "CAPCUT - 7 HARI (PRIVATE)", price: "Rp12.000", img: "https://i.postimg.cc/WFN8V0Kg/capcut.png" },
+      { name: "ALIGHT MOTION - 1 TAHUN (PRIVATE)", price: "Rp15.000", img: "https://i.postimg.cc/JtBDnsLk/alight.png" },
+      { name: "WE TV - 1 BULAN (SHARING)", price: "Rp16.000", img: "https://i.postimg.cc/N9xg9vpZ/wetv.png" },
+      { name: "ALIGHT MOTION - 1 TAHUN (SHARING)", price: "Rp12.000", img: "https://i.postimg.cc/JtBDnsLk/alight.png" },
+      { name: "VIDIO PLATINUM + LIGA 1 - 1 BULAN (PRIVATE)", price: "Rp34.000", img: "https://i.postimg.cc/zLKDNgWz/vidio.png" },
+      { name: "CRUNCHYROLL - 1 TAHUN (SHARING)", price: "Rp15.000", img: "https://i.postimg.cc/fJ8NQvrj/crunchyroll.png" },
+      { name: "VIDIO PLATINUM + LIGA 1 - 1 BULAN (SHARING)", price: "Rp24.000", img: "https://i.postimg.cc/zLKDNgWz/vidio.png" },
+      { name: "YOUKU PREMIUM - 1 TAHUN (SHARING)", price: "Rp15.000", img: "https://i.postimg.cc/D42wBwS2/youku.png" },
+      { name: "CAPCUT - 7 HARI (SHARING)", price: "Rp12.000", img: "https://i.postimg.cc/WFN8V0Kg/capcut.png" },
+      { name: "YOUTUBE PREMIUM - 1 BULAN (PRIVATE)", price: "Rp10.000", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Youtube_logo.png/640px-Youtube_logo.png" } /* URL Gambar Youtube diperbarui ke link langsung dari Wikipedia */
+    ];
+
+    function renderProducts(list) {
+      const productGrid = document.getElementById("productGrid");
+      productGrid.innerHTML = "";
+      list.forEach(product => {
+        productGrid.innerHTML += `
+          <div class="product">
+            <img src="${product.img}" alt="icon" loading="eager">
+            <div>${product.name}</div>
+            <div class="price">${product.price}</div>
+            <a href="https://wa.me/6285166497792?text=Halo%2C%20saya%20ingin%20pesan%20${encodeURIComponent(product.name)}%20dengan%20harga%20${product.price}" target="_blank">
+              <button class="order-button">Order Sekarang</button>
+            </a>
+          </div>
+        `;
+      });
+    }
+
+    function filterProducts(query) {
+      const filtered = products.filter(p => p.name.toLowerCase().includes(query.toLowerCase()));
+      renderProducts(filtered);
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.classList.toggle("show-menu");
+    }
+
+    renderProducts(products);
+  </script>
+</body>
+</html>

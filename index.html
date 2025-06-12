@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veltra Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'SF Pro Display', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }body {
+  background-color: #f0f0f0;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+.welcome-popup {
+  background: #ffffff;
+  color: #333;
+  padding: 12px 20px;
+  text-align: center;
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  animation: fadeSlide 2s forwards;
+}
+
+@keyframes fadeSlide {
+  0% { opacity: 1; transform: translateY(0); }
+  80% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-100%); display: none; }
+}
+
+header {
+  text-align: center;
+  background: linear-gradient(to right, #4b6cb7, #182848);
+  color: white;
+  padding: 1.2rem;
+  position: relative;
+}
+
+header img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+header p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.menu-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+}
+
+.menu-content {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+.menu-content a {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.menu-content a img {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+.menu-content a:hover {
+  background-color: #eee;
+}
+
+.show-menu {
+  display: block;
+}
+
+.box-section {
+  background-color: white;
+  margin: 1.5rem;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  animation: fadeUp 1s ease forwards;
+}
+
+.dark .box-section {
+  background-color: #1e1e1e;
+}
+
+.box-section p {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.payment-section {
+  margin: 1.5rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.dark .payment-section {
+  background-color: #1e1e1e;
+}
+
+.payment-section h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.payment-methods {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.payment-methods div {
+  text-align: center;
+}
+
+.payment-methods img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.start-button {
+  display: block;
+  margin: 2rem auto;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #4b6cb7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.start-button:hover {
+  background-color: #3954a1;
+}
+
+  </style>
+</head>
+<body>
+  <div class="welcome-popup">Selamat datang kak di Veltra Store!</div>
+  <header>
+    <img src="https://i.postimg.cc/jDLNTZZz/animeguy.jpg" alt="logo chibi">
+    <h1>Veltra Store</h1>
+    <p>Langganan Aplikasi Premium Murah</p>
+    <button class="menu-button" onclick="toggleMenu()">⋮</button>
+    <div class="menu-content" id="menu">
+      <a href="https://wa.me/6285166497792" target="_blank"><img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png"/>Contact Person</a>
+      <a href="https://www.instagram.com/veltrastore_jasasuntiksosmed/profilecard/?igsh=MTk3d2MwajBwNW5t" target="_blank"><img src="https://img.icons8.com/fluency/48/instagram-new.png"/>Testimoni</a>
+      <a href="#" onclick="toggleDarkMode()">🌓 Dark Mode</a>
+    </div>
+  </header>
+  <section class="box-section">
+    <p>Langganan aplikasi premium adalah solusi hemat untuk menikmati fitur lengkap dari berbagai aplikasi seperti Netflix, Spotify, CapCut, Canva, dan lainnya tanpa perlu membayar harga asli yang mahal.</p>
+  </section>
+  <section class="box-section">
+    <p>Kenapa harus beli di Veltra Store? Karena kami menawarkan harga termurah, proses cepat, dan pelayanan ramah. Sudah dipercaya ratusan pelanggan dengan banyak testimoni positif.</p>
+  </section>
+  <section class="box-section">
+    <p>Kualitas langganan di Veltra Store dijamin aman, legal, dan tahan lama. Setiap akun dicek manual dan diberikan garansi jika ada kendala dalam waktu tertentu.</p>
+  </section>
+  <section class="payment-section">
+    <h2>Metode Pembayaran</h2>
+    <div class="payment-methods">
+      <div>
+        <img src="https://i.postimg.cc/4nfLdpK2/gopay.png" alt="Gopay" loading="eager">
+        <div>Gopay</div>
+      </div>
+      <div>
+        <img src="https://i.postimg.cc/WqqsrCWT/dana.png" alt="Dana" loading="eager">
+        <div>Dana</div>
+      </div>
+      <div>
+        <img src="https://i.postimg.cc/ZWBDmZ9T/seabank.png" alt="SeaBank" loading="eager">
+        <div>SeaBank</div>
+      </div>
+      <div>
+        <img src="https://i.postimg.cc/qtFYnR96/qris.png" alt="QRIS" loading="eager">
+        <div>QRIS</div>
+      </div>
+    </div>
+  </section>
+  <button class="start-button" onclick="goToPage2()">Mulai Sekarang</button>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.classList.toggle("show-menu");
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    }
+
+    // Fungsi baru untuk navigasi ke Page 2
+    function goToPage2() {
+      // Pastikan nama file HTML Page 2 sudah benar, contoh: 'produk.html'
+      window.location.href = 'produk.html';
+    }
+  </script>
+</body>
+</html>
